@@ -1,0 +1,16 @@
+https://lily-plate-b6a.notion.site/Case-Study-082bcd700e034e0b85a54bf82ba590ab
+
+
+diagram:https://app.diagrams.net/#G1ClaJvoi94Kkk53C69LA3r_5K7lzfJrgx#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D
+
+
+<!-- slide -->
+PostgreSQL: https://www.canva.com/design/DAF5qX22jtQ/_LG0bKIK6_Ai-KQDb8zNTA/view?utm_content=DAF5qX22jtQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h67d1015e4d&fbclid=IwY2xjawKURQxleHRuA2FlbQIxMABicmlkETFlVmNqM1Vrd0dKbHhaVkFmAR6XSEp8a7swfyCEYqkchmO5CFZUbBx0D44YYTD9WeOeAIaPeT-3vZBuXNlzoQ_aem_TaWijA3x1L2vm9VrJtTviw
+
+
+Normalization: https://www.canva.com/design/DAF5ZdVgbh8/pL9P2g4RTiajq5tIhr6Qow/view?utm_content=DAF5ZdVgbh8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8de8624fb6&fbclid=IwY2xjawKURR9leHRuA2FlbQIxMABicmlkETFlVmNqM1Vrd0dKbHhaVkFmAR7ZyBOhXypYNhzsKkjeEFObnHuW7wGLX6hBxhi5r_BFiPlfnbahdbwBfVt2ww_aem_6eEkkFUSJM2dCCVuv9cFwg
+
+
+Advanced SQL:https://www.canva.com/design/DAF8dyhJgvI/dJTVvTYKhsLYPCoD4b_xqw/view?utm_content=DAF8dyhJgvI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h46fca5fe6e&fbclid=IwY2xjawKURWNleHRuA2FlbQIxMABicmlkETFlVmNqM1Vrd0dKbHhaVkFmAR4CANnde86wnpGoM19OQgimJ5z-i2Jhk6h_HKtxT0Nq-pRKx4oAdec1gssUNA_aem_Ub0v-_ZRQWj5kg7FvrY9og
+
+Database Design:https://www.canva.com/design/DAF5gdk2Mto/ukS-i-0D6PXDo7wTMntQ9A/view?utm_content=DAF5gdk2Mto&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdbc542cd42&fbclid=IwY2xjawKURXlleHRuA2FlbQIxMABicmlkETFlVmNqM1Vrd0dKbHhaVkFmAR6XSEp8a7swfyCEYqkchmO5CFZUbBx0D44YYTD9WeOeAIaPeT-3vZBuXNlzoQ_aem_TaWijA3x1L2vm9VrJtTviw
