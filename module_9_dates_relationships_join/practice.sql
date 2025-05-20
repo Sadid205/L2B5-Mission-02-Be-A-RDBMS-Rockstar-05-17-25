@@ -13,7 +13,7 @@ FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL;
 
 create TABLE departments(
     department_id  SERIAL PRIMARY KEY,
-    name    VARCHAR(10)
+    title    VARCHAR(10)
 );
 
 
@@ -25,7 +25,7 @@ CREATE TABLE courses(
 ALTER TABLE departments
 ALTER COLUMN name TYPE VARCHAR(50);
 
-INSERT INTO departments (name) VALUES
+INSERT INTO departments (title) VALUES
 ('CS'),
 ('Business'),
 ('Mech Eng'),
@@ -106,7 +106,7 @@ INSERT INTO students(name,department_id,last_login) VALUES
 
 -- Delete a department and see how students are affected using ON DELETE CASCADE and ON DELETE SET NULL.
 DELETE FROM departments
-WHERE id = 5;
+WHERE department_id = 5;
 
 SELECT * FROM students;
 DROP TABLE students;
@@ -114,26 +114,25 @@ DROP TABLE departments;
 SELECT * FROM students WHERE department_id = 6;
 
 -- Join students and departments using INNER JOIN to display each student's department name.
-SELECT students.*,departments.name as department_name FROM students
-INNER JOIN departments ON students.department_id=departments.id;
+SELECT students.*,departments.title as department_name FROM students
+INNER JOIN departments ON students.department_id=departments.department_id;
 
 -- Use a LEFT JOIN to show all students including those without a department.
-SELECT students.*,departments.name as department_name FROM students
-LEFT JOIN departments ON students.department_id=departments.id;
+SELECT * FROM students
+LEFT JOIN departments ON students.department_id=departments.department_id;
 
 -- Use a RIGHT JOIN to show all departments including those without students.
 
-SELECT students.*,departments.name as department_name FROM students
-RIGHT JOIN departments ON students.department_id=departments.id;
+SELECT * FROM students
+RIGHT JOIN departments ON students.department_id=departments.department_id;
 -- Perform a FULL JOIN to get all records from both students and departments.
-SELECT students.*,departments.name as department_name FROM students
-FULL JOIN departments ON students.department_id=departments.id;
+SELECT * FROM students
+FULL JOIN departments ON students.department_id=departments.department_id;
 
 -- Create a cross-product of all students and courses using CROSS JOIN.
 SELECT * FROM students
 CROSS JOIN courses;
 
--- Use NATURAL JOIN between tables that have a shared column like department_id.
 
 
 ALTER TABLE departments
@@ -154,4 +153,5 @@ NATURAL JOIN departments;
 SELECT * FROM students;
 SELECT * FROM departments;
 
-
+ALTER TABLE departments
+RENAME COLUMN name to title;
