@@ -67,3 +67,5 @@ FROM employees
 WHERE department_name in (SELECT department_name FROM employees WHERE department_name LIKE '%R%');
 
 SELECT department_name FROM employees WHERE department_name LIKE '%R%';
+
+
