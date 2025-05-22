@@ -224,3 +224,92 @@ $$;
 
 call delete_students();
 SELECT * FROM students;
+
+CREATE TABLE enrollments_log(
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES students(id),
+    enroll_time TIMESTAMP
+);
+
+-- Create a trigger that automatically logs enrollment when a student is added to course_enrollments.
+
+CREATE or replace FUNCTION add_logs()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+    BEGIN
+        INSERT INTO enrollments_log(student_id,enroll_time) VALUES(NEW.student_id,now());
+        RETURN OLD;
+    END
+$$;
+
+CREATE TRIGGER add_enrolled_student
+AFTER INSERT
+ON course_enrollments
+FOR EACH ROW
+EXECUTE FUNCTION add_logs();
+
+SELECT * FROM enrollments_log;
+
+INSERT INTO course_enrollments(student_id,course_title,enrolled_on) VALUES
+(8, 'Psychology', '2025-05-08'),
+(7, 'History', '2025-05-07');
+
+-- TRUNCATE Table enrollments_log;
+
+-- Add a trigger that sets the score to 0 if a new student record is added without a score.
+
+CREATE or replace FUNCTION add_score()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+    BEGIN
+        IF NEW.score IS NULL THEN
+            NEW.score := 0;
+        END IF;
+        RETURN NEW;
+    END;
+$$;
+
+CREATE or replace TRIGGER add_score_trigger
+BEFORE INSERT
+ON students
+FOR EACH ROW
+EXECUTE FUNCTION add_score();
+
+INSERT INTO students(name,age,department_id) VALUES
+('Charlie Brown', 19, 3),
+('David Wilson', 21, 1);
+SELECT * FROM students WHERE department_id = 3;
+
+-- Add an index to the score column in the students table.
+DO $$ 
+DECLARE 
+    i INT := 1;
+BEGIN
+    WHILE i <= 600000 LOOP
+        INSERT INTO students (name, age, score, department_id)
+        VALUES ('Student ' || i, 18 + (i % 10), 50 + (i % 51), 1 + (i % 8));
+        i := i + 1;
+    END LOOP;
+END $$;
+
+-- Add an index to the score column in the students table.
+CREATE INDEX idx_students_score
+ON students(score);
+-- Compare query performance with and without indexes using EXPLAIN.
+EXPLAIN ANALYSE
+SELECT * FROM students WHERE score = 88;
+
+DROP INDEX idx_students_score;
+
+-- Add a composite index on student_id and enrolled_on in the course_enrollments table.
+CREATE INDEX idx_course_enrollments_student_id_enrolled_on
+ON course_enrollments(student_id,enrolled_on);
+
+-- Compare query performance with and without indexes using EXPLAIN.
+EXPLAIN ANALYSE
+SELECT * FROM course_enrollments WHERE student_id=704438 AND enrolled_on='2024-06-01';
+
