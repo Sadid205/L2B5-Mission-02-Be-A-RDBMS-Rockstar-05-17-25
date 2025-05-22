@@ -29,48 +29,29 @@ INSERT INTO departments (name) VALUES
 ('History'),
 ('Psychology');
 
-
+SELECT * FROM students;
 INSERT INTO students (name,age,score,department_id) VALUES
 ('Alice Johnson', 20, 85, 1),
-('Bob Smith', 21, 78, 2),
-('Charlie Brown', 22, 90, 3),
-('David Wilson', 23, 88, 4),
-('Eva Davis', 19, 92, 5),
-('Frank Garcia', 20, 75, 6),
-('Grace Lee', 21, 80, 7),
-('Hannah Clark', 22, 89, 8),
-('Isaac Moore', 19, 95, 1),
-('James Hall', 20, 83, 2),
-('Katherine Adams', 21, 87, 3),
-('Liam Thomas', 22, 91, 4),
-('Mia Robinson', 23, 85, 5),
-('Noah Martinez', 19, 79, 6),
-('Olivia Hernandez', 20, 86, 7),
-('Peter Young', 21, 88, 8),
-('Quincy Wright', 22, 93, 1),
-('Rachel King', 23, 82, 2),
-('Samuel Walker', 19, 90, 3),
-('Tina Allen', 20, 77, 4),
-('Umar Green', 21, 85, 5),
-('Vera Baker', 22, 78, 6),
-('William Carter', 23, 80, 7),
-('Xander Nelson', 19, 96, 8),
-('Yasmine Rodriguez', 20, 84, 1),
-('Zachary Scott', 21, 88, 2),
-('Abigail Mitchell', 22, 75, 3),
-('Benjamin Perez', 23, 91, 4),
-('Cameron Stewart', 19, 79, 5),
-('Daniel White', 20, 83, 6),
-('Eliza Baker', 21, 90, 7),
-('Felix Cooper', 22, 87, 8),
-('Gabriella Evans', 23, 81, 1),
-('Henry Taylor', 19, 94, 2),
-('Isabelle Morgan', 20, 77, 3),
-('Jacob Foster', 21, 86, 4),
-('Kelsey Reed', 22, 89, 5),
-('Leo Parker', 23, 92, 6),
-('Mason Edwards', 19, 85, 7),
-('Natalie Barnes', 20, 80, 8);
+('Bob Smith', 22, 90, 2),
+('Charlie Brown', 19, 78, 3),
+('David Wilson', 21, 88, 1),
+('Emma Davis', 23, 92, 2),
+('Frank Martin', 20, 81, 3),
+('Grace Lee', 22, 87, 1),
+('Henry Thompson', 24, 93, 2),
+('Isabella White', 19, 76, 3),
+('Jack Harris', 21, 89, 1),
+('Katherine Clark', 22, 85, 2),
+('Liam Walker', 20, 82, 3),
+('Mia Hall', 23, 94, 1),
+('Nathan Scott', 21, 88, 2),
+('Olivia Adams', 19, 79, 3),
+('Peter Baker', 22, 86, 1),
+('Quinn Carter', 20, 90, 2),
+('Rachel Evans', 24, 95, 3),
+('Samuel Green', 21, 83, 1),
+('Taylor King', 22, 91, 2);
+
 
 INSERT INTO course_enrollments (student_id,course_title,enrolled_on) VALUES
 (1, 'Database Systems', '2025-01-10'),
@@ -206,4 +187,40 @@ $$;
 
 SELECT * FROM get_student_details(7);
 
+SELECT * FROM students;
+
+-- Write a stored procedure to update a student's department.
+CREATE Procedure update_student(std_id int,dpt_id int)
+LANGUAGE plpgsql
+AS
+$$
+    BEGIN
+        UPDATE students
+        set department_id = dpt_id
+        WHERE students.id = std_id;
+    END
+$$;
+
+call update_student(1,4);
+SELECT * FROM students;
+
+SELECT * FROM students
+LEFT JOIN course_enrollments ON students.id = course_enrollments.student_id;
+
+-- Write a procedure to delete students who haven't enrolled in any course.
+CREATE PROCEDURE delete_students()
+LANGUAGE plpgsql
+AS
+$$
+    BEGIN 
+        DELETE FROM students
+        WHERE id IN (
+            SELECT s.id FROM students as s
+            LEFT JOIN course_enrollments as ce ON s.id = ce.student_id
+            WHERE ce.student_id IS NULL
+        );
+    END
+$$;
+
+call delete_students();
 SELECT * FROM students;
